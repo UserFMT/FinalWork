@@ -1,5 +1,3 @@
-from time import sleep
-
 import allure
 import pytest
 import params
@@ -120,10 +118,13 @@ def test_popular_destinations(browser):
                     By.CLASS_NAME, selector_fields[1]).text
                 if name_city in params.popular_city:
                     popular = True
-                    with allure.step(f'Открыли/закрыли список билетов для {name_city}'):
-                        pop.find_element(By.CLASS_NAME, selector_fields[2]).click()
+                    with allure.step(f'Открыли/закрыли список билетов '
+                                     f'для {name_city}'):
+                        pop.find_element(By.CLASS_NAME,
+                                         selector_fields[2]).click()
                         WebDriverWait(browser, 5)
-                        pop.find_element(By.CLASS_NAME, selector_fields[2]).click()
+                        pop.find_element(By.CLASS_NAME,
+                                         selector_fields[2]).click()
             assert popular is True, ("Ни один город из списка не "
                                      "найден в числе популярных")
 
@@ -167,7 +168,6 @@ def test_error_for_identity_fields(browser):
         with allure.step('Фиксируем название города в поле "Куда"'
                          'идентичное полю "Откуда"'):
             destination = avia_page.find_one_XPATH(selector_fields[2])
-            #destination.clear()
             destination.send_keys(name)
             element = avia_page.find_one_XPATH(selector_fields[4])
             WebDriverWait(browser, 10)
@@ -180,7 +180,8 @@ def test_error_for_identity_fields(browser):
 
 @allure.title("Негативный тест поиска билетов без указания даты")
 @allure.description('Проверяем наличие текста ошибки '
-                    'если дата в шаблоне поиска не указана и нажата кнопка "Найти билеты"')
+                    'если дата в шаблоне поиска не указана и нажата'
+                    ' кнопка "Найти билеты"')
 @allure.severity("critical")
 @pytest.mark.negative_test
 def test_none_date(browser):

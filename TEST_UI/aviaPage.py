@@ -42,7 +42,7 @@ class aviaPage:
                     all_action = False
         return all_action
 
-    @allure.title('Атрибуты города вылета')
+    @allure.title('Атрибуты города вылета ')
     def code_name(self, selector1, selector2: str) -> list[str]:
         with allure.step('Определяем код  и название города вылета'):
             code = self.find_element_selector(selector1).text

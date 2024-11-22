@@ -35,19 +35,21 @@ class aviaPage:
                   self.find_elements_selector(selector_fields[2]))
         origin.extend(self.find_elements_selector(selector_fields[1]))
         for org in origin:
-            with allure.step(f'{org.tag_name} - доступность {org.is_displayed()} - видимость {org.is_enabled()}'):
+            with allure.step(f'{org.tag_name} - '
+                             f'доступность {org.is_displayed()} - '
+                             f'видимость {org.is_enabled()}'):
                 if not (org.is_displayed()) and not (org.is_enabled()):
                     all_action = False
         return all_action
 
     @allure.title('Атрибуты города вылета')
-    def code_name(self, selector1, selector2 : str ) -> list[str] :
+    def code_name(self, selector1, selector2: str) -> list[str]:
         with allure.step('Определяем код  и название города вылета'):
             code = self.find_element_selector(selector1).text
             name = self.find_one_XPATH(selector2).get_attribute("value")
         return [code, name]
 
     @allure.title('Размерность полученного списка')
-    def len_list(self, selector : str) -> int :
+    def len_list(self, selector: str) -> int:
         list = self.find_elements_selector(selector)
         return len(list)

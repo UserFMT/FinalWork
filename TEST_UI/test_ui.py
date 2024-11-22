@@ -107,8 +107,6 @@ def test_popular_destinations(browser):
     try:
         with allure.step("Скроллим вниз главную страницу"):
             browser.execute_script("window.scrollBy(0, 4500)")
-            #browser.execute_script("window.scrollBy(0, window.innerHeight,'smooth')")
-
             WebDriverWait(browser, 5)
         with ((allure.step('Выбираем популярные направления'))):
             popular_directions = avia_page.find_elements_selector(
@@ -131,8 +129,6 @@ def test_popular_destinations(browser):
 
         with allure.step("Скроллим вверх главную страницу"):
             browser.execute_script("window.scrollBy(0, -4500)")
-            #browser.execute_script("window.scrollBy(0, -window.innerHeight)")
-
         WebDriverWait(browser, 5)
     except Exception as e:
         print(f'Ошибка выполнения теста test_popular_destinations - {e}')
@@ -174,7 +170,7 @@ def test_error_for_identity_fields(browser):
             #destination.clear()
             destination.send_keys(name)
             element = avia_page.find_one_XPATH(selector_fields[4])
-            WebDriverWait(browser, 10 )
+            WebDriverWait(browser, 10)
         with allure.step('Проверяем видимость сообщения об ошибке'):
             assert element.is_displayed(), ('Информация об ошибке '
                                             'ввода отсутствует')
@@ -187,7 +183,7 @@ def test_error_for_identity_fields(browser):
                     'если дата в шаблоне поиска не указана и нажата кнопка "Найти билеты"')
 @allure.severity("critical")
 @pytest.mark.negative_test
-def test_None_date(browser):
+def test_none_date(browser):
     avia_page = aviaPage(browser, params.URL)
     selector_fields = [
         '[data-test-id="form-submit"]',

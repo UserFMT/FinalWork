@@ -21,7 +21,6 @@ def test_get_tow_way(code_city, data, base_url, res):
         apitest=apiPage(base_url)
     with allure.step('Выполняем запрос'):
         response =apitest.get_json(
-            #f'{apitest.base_url}' +
             f'origin_iata={code_city[0]}&destination_iata={code_city[1]}&'
             f'depart_start={data[0]}& return_start ={data[1]}&'
             f'depart_range=6&return_range=6&affiliate=false&market=ru')
@@ -141,12 +140,7 @@ def test_city_default(code_city, base_url, status):
 def test_search_parameters_negative(code_city,data, base_url, status):
     with allure.step(f'Фиксируем первичные невалидные данные для поиска по кодам городов маршрута : {code_city}'):
         apitest=apiPage(base_url)
-        #code_city = ["MOW", "MOW"]
-        #data = ["2024-12-15", "2024-12-09"]
-        #BASE_URL = "https://min-prices.aviasales.ru/price_matrix?"
     with allure.step('Выполняем запрос'):
-        #response = requests.get(
-        #f'{BASE_URL}' +
         response = apitest.get_obj(f'origin_iata={code_city[0]}&'
                                    f'destination_iata={code_city[1]}&'
                                    f'depart_start={data[0]}&'
